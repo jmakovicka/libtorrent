@@ -578,7 +578,7 @@ FileList::open_file(File* node, const Path& lastPath, int flags) {
     return false;
   }
 
-  return node->prepare(MemoryChunk::prot_read, 0);
+  return node->prepare(MemoryChunk::prot_read | (node->is_resize_queued() ? MemoryChunk::prot_write : 0), 0);
 }
 
 MemoryChunk
